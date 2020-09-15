@@ -1,0 +1,19 @@
+/* .row {
+    border: 1px solid red;
+    height: 1000px;
+} */
+
+.Homepage {
+    height: 100vh;
+    border: 1px solid red;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.q {
+    width: 80%;
+    height: 80%;
+    border: 1px solid red;
+}
