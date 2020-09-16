@@ -15,6 +15,7 @@ function Homepage(props) {
   const [session, setSession] = useState(false);
   const [isIdle, setIsIdle] = useState(false);
   const [verify, setVerify] = useState(false);
+  const [aa, setaa] = useState(true);
 
   const webcamRef = useRef(null);
 
@@ -67,7 +68,7 @@ function Homepage(props) {
   };
 
   const { getRemainingTime, getLastActiveTime } = useIdleTimer({
-    timeout: 5000,
+    timeout: 3000,
     onIdle: handleOnIdle,
     onActive: handleOnActive,
     onAction: handleOnAction,
@@ -78,7 +79,7 @@ function Homepage(props) {
     <>
       <div className="row">
         <div className="col-md-12 Homepage">
-          <div className="q">
+          <div className="main-container">
             {isIdle && verify ? (
               <Verification abc={abc} isIdle={isIdle} verify={verify} />
             ) : (
@@ -97,7 +98,7 @@ function Homepage(props) {
                 ) : (
                   <button onClick={handleSession}>Stop Session</button>
                 )}
-                {/* < img src={imgSrc} /> */}
+                {/* <img src={imgSrc} /> */}
               </>
             )}
           </div>

@@ -5,15 +5,16 @@
 
 .Homepage {
     height: 100vh;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.q {
+.main-container {
     width: 80%;
     height: 80%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    box-shadow: 0 20px 50px rgb(211, 211, 211);
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../assets/css/Verification.css";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -24,15 +24,23 @@ import Webcam from "react-webcam";
 //   new window.SpeechRecognition() || window.webkitSpeechRecognition;
 
 function Verification(props) {
-  const webcamRef = React.useRef(null);
-  const mediaRecorderRef = React.useRef(null);
-  const [capturing, setCapturing] = React.useState(false);
-  const [recordedChunks, setRecordedChunks] = React.useState([]);
-  const [AXX, setAXX] = React.useState(false);
-  const [randomNumber, setRandomNumber] = React.useState(null);
+  const webcamRef = useRef(null);
+  const mediaRecorderRef = useRef(null);
+  const [capturing, setCapturing] = useState(false);
+  const [recordedChunks, setRecordedChunks] = useState([]);
+  const [randomNumber, setRandomNumber] = useState(null);
+  const [modal, showmodal] = useState(false);
 
   const { transcript, resetTranscript } = useSpeechRecognition();
   // var recognition = new window.SpeechRecognition();
+
+  useEffect(() => {
+    showmodal(true);
+    // setInterval(() => {
+    //   showmodal(false);
+    // }, 2000);
+    generateNumber();
+  }, []);
 
   useEffect(() => {
     if (transcript && capturing) {
@@ -53,21 +61,21 @@ function Verification(props) {
 
   const generateNumber = () => {
     // console.log(Math.floor(Math.random() * 9000) + 1000);
-    let x = Math.floor(Math.random() * 9000) + 1000;
-    setRandomNumber(x);
+    let random_number = Math.floor(Math.random() * 9000) + 1000;
+    setRandomNumber(random_number);
   };
 
   const handleStartCaptureClick = () => {
     setCapturing(true);
     SpeechRecognition.startListening({ continuous: true });
-    // mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
-    //   mimeType: "video/webm",
-    // });
-    // mediaRecorderRef.current.addEventListener(
-    //   "dataavailable",
-    //   handleDataAvailable
-    // );
-    // mediaRecorderRef.current.start();
+    mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
+      mimeType: "video/webm",
+    });
+    mediaRecorderRef.current.addEventListener(
+      "dataavailable",
+      handleDataAvailable
+    );
+    mediaRecorderRef.current.start();
   };
 
   // const handleDataAvailable = React.useCallback(
@@ -86,9 +94,13 @@ function Verification(props) {
   };
 
   const handleStopCaptureClick = () => {
-    // mediaRecorderRef.current.stop();
+    mediaRecorderRef.current.stop();
     setCapturing(false);
     SpeechRecognition.stopListening();
+  };
+
+  const handleModal = () => {
+    showmodal(false);
   };
 
   // const handleDownload = () => {
@@ -109,40 +121,46 @@ function Verification(props) {
   //   }
   // };
 
-  const start = () => {
-    SpeechRecognition.startListening({ continuous: true });
-  };
-
-  const stop = () => {
-    SpeechRecognition.stopListening();
-  };
-
   return (
     <div className="Verification">
-      <div className="container-1">
-        <div className="btn-container">
-          <button className="btn-generate" onClick={generateNumber}>
-            {" "}
-            Generate{" "}
-          </button>
-          {capturing ? (
-            <button className="btn-stop" onClick={handleStopCaptureClick}>
-              Stop Capture
+      {modal ? (
+        <div className="modal-container">
+          <div className="modal-message">
+            <span className="modal-text">
+              You have been idle for 5 minutes.Verify youself
+            </span>
+            <button className="modal-btn" onClick={handleModal}>
+              Ok
             </button>
-          ) : (
-            <button className="btn-start" onClick={handleStartCaptureClick}>
-              Start Capture
-            </button>
-          )}
+          </div>
         </div>
-        <span className="random-number">{randomNumber}</span>
-      </div>
-      <div className="container-2">
-        <div className="cam-container">
-          <Webcam audio={false} ref={webcamRef} />
-        </div>
-        <div className="record-container"></div>
-      </div>
+      ) : (
+        <>
+          <div className="container-1">
+            <div className="btn-container">
+              <button className="btn-generate" onClick={generateNumber}>
+                {" "}
+                Generate{" "}
+              </button>
+              {capturing ? (
+                <button className="btn-stop" onClick={handleStopCaptureClick}>
+                  Stop Capture
+                </button>
+              ) : (
+                <button className="btn-start" onClick={handleStartCaptureClick}>
+                  Start Capture
+                </button>
+              )}
+            </div>
+            <div className="random-number">{randomNumber}</div>
+          </div>
+          <div className="container-2">
+            <div className="cam-container">
+              <Webcam audio={false} ref={webcamRef} />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

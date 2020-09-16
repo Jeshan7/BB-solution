@@ -166,31 +166,6 @@ function App() {
   return (
     <div className="App">
       <Homepage />
-      {/* <Webcam
-        audio={false}
-        height={300}
-        ref={webcamRef}
-        screenshotFormat="image/jpeg"
-        width={300}
-        videoConstraints={videoConstraints}
-      />
-      <button onClick={start}>Capture photo</button>
-      <button onClick={stop}>stop</button>
-      <img src={imgSrc} /> */}
-
-      {/* <Webcam audio={false} ref={webcamRef} />
-      {capturing ? (
-        <button onClick={handleStopCaptureClick}>Stop Capture</button>
-      ) : (
-        <button onClick={handleStartCaptureClick}>Start Capture</button>
-      )}
-
-      {recordedChunks.length > 0 && (
-        <button onClick={handleDownload}>Download</button>
-      )}
-      <button onClick={handle}>a</button> */}
-
-      {/* <button onClick={handle}>a</button> */}
     </div>
   );
 }
