@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import "../assets/css/Verification.css";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -24,7 +23,7 @@ import Webcam from "react-webcam";
 // var recognition =
 //   new window.SpeechRecognition() || window.webkitSpeechRecognition;
 
-function Verification() {
+function Verification(props) {
   const webcamRef = React.useRef(null);
   const mediaRecorderRef = React.useRef(null);
   const [capturing, setCapturing] = React.useState(false);
@@ -42,7 +41,8 @@ function Verification() {
       resetTranscript();
       console.log("aaaas", transcript);
       if (randomNumber == transcript) {
-        console.log("saas", true);
+        props.abc();
+        // console.log("saas", true);
       }
     }
   }, [transcript, capturing]);
@@ -116,20 +116,30 @@ function Verification() {
   const stop = () => {
     SpeechRecognition.stopListening();
   };
+
   return (
     <div className="Verification">
       <div className="container-1">
-        {randomNumber}
-        <button onClick={generateNumber}> Generate </button>
+        <div className="btn-container">
+          <button className="btn-generate" onClick={generateNumber}>
+            {" "}
+            Generate{" "}
+          </button>
+          {capturing ? (
+            <button className="btn-stop" onClick={handleStopCaptureClick}>
+              Stop Capture
+            </button>
+          ) : (
+            <button className="btn-start" onClick={handleStartCaptureClick}>
+              Start Capture
+            </button>
+          )}
+        </div>
+        <span className="random-number">{randomNumber}</span>
       </div>
       <div className="container-2">
         <div className="cam-container">
           <Webcam audio={false} ref={webcamRef} />
-          {capturing ? (
-            <button onClick={handleStopCaptureClick}>Stop Capture</button>
-          ) : (
-            <button onClick={handleStartCaptureClick}>Start Capture</button>
-          )}
         </div>
         <div className="record-container"></div>
       </div>

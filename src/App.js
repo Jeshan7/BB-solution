@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useIdleTimer } from "react-idle-timer";
-import logo from "./logo.svg";
 import "./App.css";
 import Webcam from "react-webcam";
 import SpeechRecognition, {

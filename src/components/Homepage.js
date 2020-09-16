@@ -12,23 +12,24 @@ const videoConstraints = {
 
 function Homepage(props) {
   const [imgSrc, setImgSrc] = useState(null);
-  const [az, setaz] = useState(false);
+  const [session, setSession] = useState(false);
   const [isIdle, setIsIdle] = useState(false);
+  const [verify, setVerify] = useState(false);
 
   const webcamRef = useRef(null);
 
   useEffect(() => {
     let interval = null;
-    if (az) {
+    if (session) {
       interval = setInterval(() => {
         capture();
+        console.log("heeeee");
       }, 2000);
     } else {
-      console.log("hello");
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [az]);
+  }, [session]);
 
   const capture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -40,17 +41,20 @@ function Homepage(props) {
     // console.log("hello", file);
   };
 
-  const start = () => {
-    setaz(true);
-  };
-  const stop = () => {
-    setaz(false);
+  const handleSession = () => {
+    setSession(!session);
   };
 
   const handleOnIdle = (event) => {
-    // console.log("user is idle", event);
     setIsIdle(true);
-    // console.log("last active", getLastActiveTime());
+    setVerify(true);
+    setSession(false);
+  };
+
+  const abc = () => {
+    setIsIdle(false);
+    setVerify(false);
+    // console.log("user did something", e);
   };
 
   const handleOnActive = (event) => {
@@ -75,22 +79,25 @@ function Homepage(props) {
       <div className="row">
         <div className="col-md-12 Homepage">
           <div className="q">
-            {isIdle ? (
-              <Verification />
+            {isIdle && verify ? (
+              <Verification abc={abc} isIdle={isIdle} verify={verify} />
             ) : (
               <>
                 {" "}
                 <Webcam
                   audio={false}
-                  height={300}
+                  height={500}
                   ref={webcamRef}
                   screenshotFormat="image/jpeg"
-                  width={300}
+                  width={500}
                   videoConstraints={videoConstraints}
                 />
-                <button onClick={start}>Capture photo</button>
-                <button onClick={stop}>stop</button>
-                <img src={imgSrc} />
+                {!session ? (
+                  <button onClick={handleSession}>Start Session</button>
+                ) : (
+                  <button onClick={handleSession}>Stop Session</button>
+                )}
+                {/* < img src={imgSrc} /> */}
               </>
             )}
           </div>
