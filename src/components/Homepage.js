@@ -3,6 +3,7 @@ import "../assets/css/Homepage.css";
 import { useIdleTimer } from "react-idle-timer";
 import Webcam from "react-webcam";
 import Verification from "./Verification";
+import SignatureCanvas from "react-signature-canvas";
 
 const videoConstraints = {
   width: 1280,
@@ -16,8 +17,10 @@ function Homepage(props) {
   const [isIdle, setIsIdle] = useState(false);
   const [verify, setVerify] = useState(false);
   const [aa, setaa] = useState(true);
+  const [b, setb] = useState(false);
 
   const webcamRef = useRef(null);
+  const signRef = useRef(null);
 
   useEffect(() => {
     let interval = null;
@@ -47,14 +50,17 @@ function Homepage(props) {
   };
 
   const handleOnIdle = (event) => {
-    setIsIdle(true);
-    setVerify(true);
-    setSession(false);
+    if (b) {
+      setIsIdle(true);
+      setVerify(true);
+      setSession(false);
+    }
   };
 
   const abc = () => {
     setIsIdle(false);
     setVerify(false);
+    setb(true);
     // console.log("user did something", e);
   };
 
@@ -68,13 +74,21 @@ function Homepage(props) {
   };
 
   const { getRemainingTime, getLastActiveTime } = useIdleTimer({
-    timeout: 3000,
+    timeout: 200000,
     onIdle: handleOnIdle,
     onActive: handleOnActive,
     onAction: handleOnAction,
     debounce: 500,
   });
 
+  const handleClear = () => {
+    signRef.current.clear();
+  };
+  const next = () => {
+    if (!signRef.current.isEmpty()) {
+      setb(true);
+    }
+  };
   return (
     <>
       <div className="row">
@@ -85,20 +99,45 @@ function Homepage(props) {
             ) : (
               <>
                 {" "}
-                <Webcam
-                  audio={false}
-                  height={500}
-                  ref={webcamRef}
-                  screenshotFormat="image/jpeg"
-                  width={500}
-                  videoConstraints={videoConstraints}
-                />
-                {!session ? (
-                  <button onClick={handleSession}>Start Session</button>
+                {!b ? (
+                  <div className="pad-container">
+                    {/* <div className="sign-pad"> */}
+                    <SignatureCanvas
+                      penColor="black"
+                      ref={signRef}
+                      canvasProps={{
+                        width: 500,
+                        height: 300,
+                        className: "sigCanvas",
+                      }}
+                    />
+                    {/* </div> */}
+                    <div className="sign-btn-grp">
+                      <button onClick={handleClear}>clear</button>
+                      <button onClick={next}>next</button>
+                    </div>
+                  </div>
                 ) : (
-                  <button onClick={handleSession}>Stop Session</button>
+                  <div className="webcamera-container">
+                    <div>
+                      <Webcam
+                        audio={false}
+                        height={300}
+                        ref={webcamRef}
+                        screenshotFormat="image/jpeg"
+                        width={300}
+                        videoConstraints={videoConstraints}
+                      />
+                    </div>
+                    <div>
+                      {!session ? (
+                        <button onClick={handleSession}>Start Session</button>
+                      ) : (
+                        <button onClick={handleSession}>Stop Session</button>
+                      )}
+                    </div>
+                  </div>
                 )}
-                {/* <img src={imgSrc} /> */}
               </>
             )}
           </div>

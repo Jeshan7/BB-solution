@@ -17,4 +17,41 @@
     height: 80%;
     /* border: 1px solid red; */
     box-shadow: 0 20px 50px rgb(211, 211, 211);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pad-container {
+    width: 80%;
+    height: 80%;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sigCanvas {
+    /* width: 80%; */
+    /* height: 80%; */
+    border: 1px solid red;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.sign-btn-grp {
+    width: 40%;
+    height: 10%;
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.webcamera-container {
+    width: 70%;
+    height: 60%;
+    border: 1px solid red;
 }
