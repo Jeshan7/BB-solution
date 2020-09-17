@@ -4,7 +4,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import Webcam from "react-webcam";
-import vIcon from "../assets/images/voice-recorder.png";
+import recorderIcon from "../assets/images/recording.gif";
 
 function Verification(props) {
   const webcamRef = useRef(null);
@@ -117,6 +117,7 @@ function Verification(props) {
         <div className="modal-container">
           <div className="modal-message">
             <span className="modal-text">
+              <img src={recorderIcon} />
               You have been idle for 5 minutes
               <br />
               Please record a video to continue
