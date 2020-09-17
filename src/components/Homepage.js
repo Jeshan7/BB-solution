@@ -5,7 +5,8 @@ import Webcam from "react-webcam";
 import Verification from "./Verification";
 import SignatureCanvas from "react-signature-canvas";
 import { isMobile } from "react-device-detect";
-import clearIcon from "../assets/images/clear1.png";
+import clearIcon from "../assets/images/close.png";
+import nextIcon from "../assets/images/next.png";
 
 const videoConstraints = {
   width: 1280,
@@ -67,6 +68,11 @@ function Homepage(props) {
 
   const handleSession = () => {
     setSession(!session);
+    if (session) {
+      setMessage("session stopped.");
+    } else {
+      setMessage("Session started.");
+    }
   };
 
   const handleOnIdle = (event) => {
@@ -82,6 +88,7 @@ function Homepage(props) {
     setIsIdle(false);
     setVerify(false);
     setb(true);
+    handleMessage("Verified");
     // console.log("user did something", e);
   };
 
@@ -95,7 +102,7 @@ function Homepage(props) {
   };
 
   const { getRemainingTime, getLastActiveTime } = useIdleTimer({
-    timeout: 2000,
+    timeout: 1000,
     onIdle: handleOnIdle,
     onActive: handleOnActive,
     onAction: handleOnAction,
@@ -113,16 +120,25 @@ function Homepage(props) {
     }
   };
 
+  const handleMessage = (msg) => {
+    setMessage(msg);
+  };
+
   return (
     <>
       <div className="row">
         <div className="col-md-12 Homepage">
           <div className="main-container">
             <div className="message-box">
-              <span>{message}</span>
+              <span>{message ? message : "hello"}</span>
             </div>
             {isIdle && verify ? (
-              <Verification abc={abc} isIdle={isIdle} verify={verify} />
+              <Verification
+                handleMessage={handleMessage}
+                abc={abc}
+                isIdle={isIdle}
+                verify={verify}
+              />
             ) : (
               <>
                 {" "}
@@ -147,21 +163,41 @@ function Homepage(props) {
                         onClick={handleClear}
                         style={{ cursor: "pointer" }}
                       />
+                      <img
+                        src={nextIcon}
+                        width="40"
+                        height="40"
+                        onClick={next}
+                        style={{ cursor: "pointer" }}
+                      />
                       {/* <button>clear</button> */}
-                      <button onClick={next}>next</button>
+                      {/* <button onClick={next}>next</button> */}
                     </div>
                   </div>
                 ) : (
                   <div className="webcamera-container">
                     <div className="cam">
-                      <Webcam
-                        audio={false}
-                        height={height}
-                        ref={webcamRef}
-                        screenshotFormat="image/jpeg"
-                        width={width}
-                        videoConstraints={videoConstraints}
-                      />
+                      <div className="camera">
+                        <Webcam
+                          audio={false}
+                          height={400}
+                          ref={webcamRef}
+                          screenshotFormat="image/jpeg"
+                          width={300}
+                          videoConstraints={videoConstraints}
+                        />
+                      </div>
+
+                      <div className="screenshot-container">
+                        <span>Screenshots</span>
+                        <div className="screenshot">
+                          {imgSrc ? (
+                            <img src={imgSrc} width="200" height="200" />
+                          ) : (
+                            "No Screenshots to show"
+                          )}
+                        </div>
+                      </div>
                     </div>
                     <div className="session-btn-grp">
                       {!session ? (

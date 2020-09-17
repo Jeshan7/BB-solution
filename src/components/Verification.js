@@ -4,24 +4,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import Webcam from "react-webcam";
-// import Home from "./Home";
-
-// var SpeechRecognition = window.SpeechRecognition;
-// var SpeechGrammarList = window.SpeechGrammarList;
-// var SpeechRecognitionEvent = window.SpeechRecognitionEvent;
-
-// var recognition = new SpeechRecognition();
-// var speechRecognitionList = new SpeechGrammarList();
-
-// const SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-// const recognition = new SpeechRecognition();
-
-// recognition.continous = true;
-// recognition.interimResults = true;
-// recognition.lang = "en-US";
-
-// var recognition =
-//   new window.SpeechRecognition() || window.webkitSpeechRecognition;
+import vIcon from "../assets/images/voice-recorder.png";
 
 function Verification(props) {
   const webcamRef = useRef(null);
@@ -60,7 +43,6 @@ function Verification(props) {
   }
 
   const generateNumber = () => {
-    // console.log(Math.floor(Math.random() * 9000) + 1000);
     let random_number = Math.floor(Math.random() * 9000) + 1000;
     setRandomNumber(random_number);
   };
@@ -76,31 +58,39 @@ function Verification(props) {
       handleDataAvailable
     );
     mediaRecorderRef.current.start();
+    props.handleMessage("Recording Started");
   };
-
-  // const handleDataAvailable = React.useCallback(
-  //   ({ data }) => {
-  //     if (data.size > 0) {
-  //       setRecordedChunks((prev) => prev.concat(data));
-  //     }
-  //   },
-  //   [setRecordedChunks]
-  // );
 
   const handleDataAvailable = (data) => {
-    if (data.size > 0) {
-      setRecordedChunks(data);
+    if (data && data.size > 0) {
+      console.log("dsd", data);
     }
   };
+  // }useCallback(
+  // ({ data }) => {
+  //   if (data.size > 0) {
+  //     setRecordedChunks((prev) => prev.concat(data));
+  //   }
+  // },
+  // [setRecordedChunks]
+  // );
+
+  // const handleDataAvailable = (data) => {
+  //   if (data.size > 0) {
+  //     setRecordedChunks(data);
+  //   }
+  // };
 
   const handleStopCaptureClick = () => {
     mediaRecorderRef.current.stop();
     setCapturing(false);
+    props.handleMessage("Wrong input");
     SpeechRecognition.stopListening();
   };
 
   const handleModal = () => {
     showmodal(false);
+    props.handleMessage("Please record a video");
   };
 
   // const handleDownload = () => {
@@ -127,7 +117,9 @@ function Verification(props) {
         <div className="modal-container">
           <div className="modal-message">
             <span className="modal-text">
-              You have been idle for 5 minutes.Verify youself
+              You have been idle for 5 minutes
+              <br />
+              Please record a video to continue
             </span>
             <button className="modal-btn" onClick={handleModal}>
               Ok

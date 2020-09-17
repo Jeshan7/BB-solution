@@ -1,7 +1,7 @@
 .Verification {
     width: 90%;
     height: 70%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
 }
 
@@ -59,39 +59,54 @@
     /* flex-direction: column; */
     align-items: center;
     justify-content: center;
-    box-shadow: 0 20px 50px rgb(211, 211, 211);
+    background-color: #424242;
+    /* box-shadow: 0 20px 50px rgb(211, 211, 211); */
 }
+
+/* modal */
 
 .modal-container {
     width: 100%;
     height: 100%;
-    /* background: red; */
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
-    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
 }
 
 .modal-message {
-    width: 30%;
-    height: 30%;
+    width: 40%;
+    height: 40%;
     /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    box-shadow: 0 20px 50px rgb(211, 211, 211);
+    background-color: #424242;
 }
 
 .modal-text {
     width: 90%;
     height: 50%;
+    color: #ffffff;
     /* border: 1px solid red; */
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-btn {
-    width: 30%;
-    height: 30%;
+    width: 25%;
+    height: 25%;
+    background: none;
+    color: #ffffff;
+    font-size: 20px;
+    border: 1px solid #ffffff;
     /* border: 1px solid red; */
+}
+
+.modal-btn:hover {
+    background-color: #000000;
+    border: none;
 }
