@@ -136,11 +136,17 @@ function Verification(props) {
                 Generate{" "}
               </button>
               {capturing ? (
-                <button className="btn-stop" onClick={handleStopCaptureClick}>
+                <button
+                  className="btn-recording"
+                  onClick={handleStopCaptureClick}
+                >
                   Stop Capture
                 </button>
               ) : (
-                <button className="btn-start" onClick={handleStartCaptureClick}>
+                <button
+                  className="btn-recording"
+                  onClick={handleStartCaptureClick}
+                >
                   Start Capture
                 </button>
               )}

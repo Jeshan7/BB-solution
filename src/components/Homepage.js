@@ -7,6 +7,7 @@ import SignatureCanvas from "react-signature-canvas";
 import { isMobile } from "react-device-detect";
 import clearIcon from "../assets/images/close.png";
 import nextIcon from "../assets/images/next.png";
+import rn from "../assets/images/check.gif";
 
 const videoConstraints = {
   width: 1280,
@@ -102,7 +103,7 @@ function Homepage(props) {
   };
 
   const { getRemainingTime, getLastActiveTime } = useIdleTimer({
-    timeout: 1000,
+    timeout: 10000,
     onIdle: handleOnIdle,
     onActive: handleOnActive,
     onAction: handleOnAction,
@@ -117,6 +118,8 @@ function Homepage(props) {
     if (!signRef.current.isEmpty()) {
       setb(true);
       setMessage("Click to start the session ");
+    } else {
+      setMessage("No signature found");
     }
   };
 
@@ -130,7 +133,15 @@ function Homepage(props) {
         <div className="col-md-12 Homepage">
           <div className="main-container">
             <div className="message-box">
-              <span>{message ? message : "hello"}</span>
+              <span>
+                {message ? (
+                  message === "Verified" ? (
+                    <img src={rn} width="50" height="50" />
+                  ) : (
+                    message
+                  )
+                ) : null}
+              </span>
             </div>
             {isIdle && verify ? (
               <Verification
@@ -201,9 +212,13 @@ function Homepage(props) {
                     </div>
                     <div className="session-btn-grp">
                       {!session ? (
-                        <button onClick={handleSession}>Start Session</button>
+                        <button className="session-btn" onClick={handleSession}>
+                          Start Session
+                        </button>
                       ) : (
-                        <button onClick={handleSession}>Stop Session</button>
+                        <button className="session-btn" onClick={handleSession}>
+                          Stop Session
+                        </button>
                       )}
                     </div>
                   </div>
