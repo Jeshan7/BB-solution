@@ -1,7 +1,7 @@
 .Verification {
-    width: 100%;
-    height: 100%;
-    /* border: 1px solid black; */
+    width: 90%;
+    height: 70%;
+    border: 1px solid black;
     display: flex;
 }
 
@@ -52,8 +52,8 @@
 }
 
 .cam-container {
-    width: 90%;
-    height: 85%;
+    width: 80%;
+    height: 80%;
     /* border: 1px solid red; */
     display: flex;
     /* flex-direction: column; */

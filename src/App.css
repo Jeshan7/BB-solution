@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  /* font-family: 'Bungee Inline', cursive; */
+  font-family: 'Titillium Web', sans-serif;
+  /* font-family: 'Cairo', sans-serif; */
+  /* font-family: 'Montserrat', sans-serif; */
 }
 
 .row {
