@@ -5,6 +5,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import Webcam from "react-webcam";
 import recorderIcon from "../assets/images/recording.gif";
+import refreshIcon from "../assets/images/refresh.png";
 
 function Verification(props) {
   const webcamRef = useRef(null);
@@ -39,7 +40,8 @@ function Verification(props) {
   }, [transcript, capturing]);
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-    return null;
+    // return null;
+    props.handleMessage("Recording Started");
   }
 
   const generateNumber = () => {
@@ -131,10 +133,10 @@ function Verification(props) {
         <>
           <div className="container-1">
             <div className="btn-container">
-              <button className="btn-generate" onClick={generateNumber}>
+              {/* <button className="btn-generate" onClick={generateNumber}>
                 {" "}
                 Generate{" "}
-              </button>
+              </button> */}
               {capturing ? (
                 <button
                   className="btn-recording"
@@ -151,7 +153,18 @@ function Verification(props) {
                 </button>
               )}
             </div>
-            <div className="random-number">{randomNumber}</div>
+            <div className="random-number">
+              <span className="number">{randomNumber}</span>
+              <div className="refresh-btn">
+                <img
+                  src={refreshIcon}
+                  width="40"
+                  height="40"
+                  onClick={generateNumber}
+                  style={{ cursor: "pointer" }}
+                />
+              </div>
+            </div>
           </div>
           <div className="container-2">
             <div className="cam-container">

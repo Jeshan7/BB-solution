@@ -105,7 +105,7 @@ function Homepage(props) {
   };
 
   const { getRemainingTime, getLastActiveTime } = useIdleTimer({
-    timeout: 10000,
+    timeout: 5000,
     onIdle: handleOnIdle,
     onActive: handleOnActive,
     onAction: handleOnAction,
@@ -207,7 +207,7 @@ function Homepage(props) {
                         <span>Screenshots</span>
                         <div className="screenshot">
                           {imgSrc ? (
-                            <img src={imgSrc} width="200" height="200" />
+                            <img src={imgSrc} width="200" height="120" />
                           ) : (
                             "No Screenshots to show"
                           )}

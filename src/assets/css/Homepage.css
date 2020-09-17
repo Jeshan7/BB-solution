@@ -203,4 +203,7 @@
         align-items: center;
         flex-direction: column-reverse; */
     }
+    .screenshot {
+        width: 90%;
+    }
 }
