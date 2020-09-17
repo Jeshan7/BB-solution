@@ -155,7 +155,7 @@ function Verification(props) {
           </div>
           <div className="container-2">
             <div className="cam-container">
-              <Webcam audio={false} width={400} height={400} ref={webcamRef} />
+              <Webcam audio={false} width={200} height={200} ref={webcamRef} />
             </div>
           </div>
         </>

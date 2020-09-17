@@ -52,6 +52,8 @@ function Homepage(props) {
       setWidth(250);
       setHeight(400);
     } else {
+      // setWidth(250);
+      // setHeight(400);
       setWidth(700);
       setHeight(360);
     }
@@ -191,10 +193,12 @@ function Homepage(props) {
                       <div className="camera">
                         <Webcam
                           audio={false}
-                          height={400}
+                          // height={400}
+                          height={200}
                           ref={webcamRef}
                           screenshotFormat="image/jpeg"
-                          width={300}
+                          // width={300}
+                          width={200}
                           videoConstraints={videoConstraints}
                         />
                       </div>

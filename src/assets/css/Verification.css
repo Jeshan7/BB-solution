@@ -89,6 +89,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* border: 1px solid red; */
 }
 
 .cam-container {
@@ -138,21 +139,6 @@
     justify-content: center;
 }
 
-/* .modal-btn {
-        width: 25%;
-        height: 25%;
-        background: none;
-        color: #ffffff;
-        font-size: 20px;
-        border: 1px solid #ffffff;
-        border: 1px solid red;
-    }
-
-    .modal-btn:hover {
-        background-color: #000000;
-        border: none;
-    } */
-
 .modal-btn {
     width: 25%;
     height: 25%;
@@ -173,4 +159,51 @@
 .modal-btn:hover {
     box-shadow: 0 -3px 20px 0 #1098ad;
     outline: none !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .modal-container {
+        width: 100%;
+        height: 100%;
+    }
+    .modal-message {
+        width: 100%;
+        height: 60%;
+    }
+    .modal-text {
+        width: 90%;
+        height: 50%;
+    }
+    .modal-btn {
+        width: 30%;
+        height: 20%;
+    }
+    .Verification {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .container-1 {
+        width: 100%;
+        height: 50%;
+    }
+    .random-number {
+        font-size: 20px;
+        width: 40%;
+    }
+    .btn-generate {
+        width: 40%;
+        height: 50%;
+    }
+    .btn-recording {
+        width: 40%;
+        height: 50%;
+    }
+    .cam-container {
+        width: 75%;
+        height: 75%;
+    }
+    .container-2 {
+        width: 100%;
+    }
 }
