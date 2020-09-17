@@ -24,6 +24,8 @@ function Homepage(props) {
   const [b, setb] = useState(false);
   const [width, setWidth] = useState(null);
   const [height, setHeight] = useState(null);
+  const [camWidth, setCamWidth] = useState(null);
+  const [camHeight, setCamHeight] = useState(null);
   const [message, setMessage] = useState(null);
 
   const webcamRef = useRef(null);
@@ -47,15 +49,17 @@ function Homepage(props) {
   }, [session]);
 
   const setPadResolution = () => {
-    setMessage("Please provide your signature to proceed.");
+    setMessage("Please provide your signature to proceed");
     if (isMobile) {
       setWidth(250);
       setHeight(400);
+      setCamWidth(250);
+      setCamHeight(120);
     } else {
-      // setWidth(250);
-      // setHeight(400);
       setWidth(700);
       setHeight(360);
+      setCamWidth(350);
+      setCamHeight(350);
     }
   };
 
@@ -72,9 +76,9 @@ function Homepage(props) {
   const handleSession = () => {
     setSession(!session);
     if (session) {
-      setMessage("session stopped.");
+      setMessage("Session stopped");
     } else {
-      setMessage("Session started.");
+      setMessage("Session started");
     }
   };
 
@@ -92,23 +96,11 @@ function Homepage(props) {
     setVerify(false);
     setb(true);
     handleMessage("Verified");
-    // console.log("user did something", e);
-  };
-
-  const handleOnActive = (event) => {
-    // console.log("user is active", event);
-    // console.log("time remaining", getRemainingTime());
-  };
-
-  const handleOnAction = (e) => {
-    // console.log("user did something", e);
   };
 
   const { getRemainingTime, getLastActiveTime } = useIdleTimer({
     timeout: 5000,
     onIdle: handleOnIdle,
-    onActive: handleOnActive,
-    onAction: handleOnAction,
     debounce: 500,
   });
 
@@ -133,6 +125,7 @@ function Homepage(props) {
     <>
       <div className="row">
         <div className="col-md-12 Homepage">
+          <div className="a">{localStorage.getItem("name")}</div>
           <div className="main-container">
             <div className="message-box">
               <span>
@@ -183,8 +176,6 @@ function Homepage(props) {
                         onClick={next}
                         style={{ cursor: "pointer" }}
                       />
-                      {/* <button>clear</button> */}
-                      {/* <button onClick={next}>next</button> */}
                     </div>
                   </div>
                 ) : (
@@ -193,12 +184,10 @@ function Homepage(props) {
                       <div className="camera">
                         <Webcam
                           audio={false}
-                          // height={400}
-                          height={200}
+                          height={camHeight}
                           ref={webcamRef}
                           screenshotFormat="image/jpeg"
-                          // width={300}
-                          width={200}
+                          width={camWidth}
                           videoConstraints={videoConstraints}
                         />
                       </div>
@@ -207,7 +196,7 @@ function Homepage(props) {
                         <span>Screenshots</span>
                         <div className="screenshot">
                           {imgSrc ? (
-                            <img src={imgSrc} width="200" height="120" />
+                            <img src={imgSrc} width="200" height="140" />
                           ) : (
                             "No Screenshots to show"
                           )}

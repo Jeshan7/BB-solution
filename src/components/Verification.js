@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import "../assets/css/Verification.css";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import Webcam from "react-webcam";
+import { isMobile } from "react-device-detect";
 import recorderIcon from "../assets/images/recording.gif";
 import refreshIcon from "../assets/images/refresh.png";
 
@@ -14,15 +15,14 @@ function Verification(props) {
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [randomNumber, setRandomNumber] = useState(null);
   const [modal, showmodal] = useState(false);
+  const [camWidth, setCamWidth] = useState(null);
+  const [camHeight, setCamHeight] = useState(null);
 
   const { transcript, resetTranscript } = useSpeechRecognition();
-  // var recognition = new window.SpeechRecognition();
 
   useEffect(() => {
     showmodal(true);
-    // setInterval(() => {
-    //   showmodal(false);
-    // }, 2000);
+    setPadResolution();
     generateNumber();
   }, []);
 
@@ -34,15 +34,23 @@ function Verification(props) {
       console.log("aaaas", transcript);
       if (randomNumber == transcript) {
         props.abc();
-        // console.log("saas", true);
       }
     }
   }, [transcript, capturing]);
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-    // return null;
     props.handleMessage("Recording Started");
   }
+
+  const setPadResolution = () => {
+    if (isMobile) {
+      setCamWidth(100);
+      setCamHeight(200);
+    } else {
+      setCamWidth(400);
+      setCamHeight(400);
+    }
+  };
 
   const generateNumber = () => {
     let random_number = Math.floor(Math.random() * 9000) + 1000;
@@ -63,31 +71,20 @@ function Verification(props) {
     props.handleMessage("Recording Started");
   };
 
-  const handleDataAvailable = (data) => {
-    if (data && data.size > 0) {
-      console.log("dsd", data);
-    }
-  };
-  // }useCallback(
-  // ({ data }) => {
-  //   if (data.size > 0) {
-  //     setRecordedChunks((prev) => prev.concat(data));
-  //   }
-  // },
-  // [setRecordedChunks]
-  // );
-
-  // const handleDataAvailable = (data) => {
-  //   if (data.size > 0) {
-  //     setRecordedChunks(data);
-  //   }
-  // };
+  const handleDataAvailable = useCallback(
+    ({ data }) => {
+      if (data.size > 0) {
+        setRecordedChunks((prev) => prev.concat(data));
+      }
+    },
+    [setRecordedChunks]
+  );
 
   const handleStopCaptureClick = () => {
     mediaRecorderRef.current.stop();
     setCapturing(false);
-    props.handleMessage("Wrong input");
     SpeechRecognition.stopListening();
+    props.handleMessage("Wrong input");
   };
 
   const handleModal = () => {
@@ -142,14 +139,14 @@ function Verification(props) {
                   className="btn-recording"
                   onClick={handleStopCaptureClick}
                 >
-                  Stop Capture
+                  Stop Recording
                 </button>
               ) : (
                 <button
                   className="btn-recording"
                   onClick={handleStartCaptureClick}
                 >
-                  Start Capture
+                  Start Recording
                 </button>
               )}
             </div>
@@ -168,7 +165,12 @@ function Verification(props) {
           </div>
           <div className="container-2">
             <div className="cam-container">
-              <Webcam audio={false} width={200} height={200} ref={webcamRef} />
+              <Webcam
+                audio={false}
+                width={camWidth}
+                height={camHeight}
+                ref={webcamRef}
+              />
             </div>
           </div>
         </>
