@@ -34,7 +34,7 @@ function Homepage(props) {
       interval = setInterval(() => {
         capture();
         console.log("heeeee");
-      }, 2000);
+      }, 120000000);
     } else {
       clearInterval(interval);
     }
@@ -82,7 +82,7 @@ function Homepage(props) {
   };
 
   const { getRemainingTime, getLastActiveTime } = useIdleTimer({
-    timeout: 5000,
+    timeout: 300000000,
     onIdle: handleOnIdle,
     debounce: 500,
   });
