@@ -1,7 +1,6 @@
 .Verification {
     width: 90%;
     height: 70%;
-    /* border: 1px solid black; */
     display: flex;
 }
 
@@ -12,7 +11,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    /* border: 1px solid red; */
 }
 
 .btn-container {
@@ -21,7 +19,6 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    /* border: 1px solid red; */
 }
 
 .btn-generate {
@@ -37,7 +34,6 @@
     cursor: pointer;
     background: #1098ad;
     transition: all .25s ease;
-    /* background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82); */
     text-shadow: 3px 3px 10px rgba(0, 0, 0, .45);
 }
 
@@ -59,7 +55,6 @@
     cursor: pointer;
     background: #1098ad;
     transition: all .25s ease;
-    /* background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82); */
     text-shadow: 3px 3px 10px rgba(0, 0, 0, .45);
 }
 
@@ -71,18 +66,14 @@
 .random-number {
     width: 100%;
     height: 40%;
-    /* border: 1px solid green; */
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    /* box-shadow: 0 20px 50px rgb(211, 211, 211); */
-    /* box-shadow: 0 -3px 20px 0 rgba(0, 0, 0, 0.5); */
 }
 
 .number {
     width: 60%;
     height: 100%;
-    /* border: 1px solid red; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,7 +86,6 @@
 .refresh-btn {
     width: 30%;
     height: 100%;
-    /* border: 1px solid red; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -108,20 +98,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* border: 1px solid red; */
 }
 
 .cam-container {
     width: 80%;
     height: 80%;
-    /* border: 1px solid red; */
     display: flex;
-    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
     background-color: #424242;
     box-shadow: 0 -3px 20px 0 rgba(0, 0, 0, 0.5);
-    /* box-shadow: 0 20px 50px rgb(211, 211, 211); */
 }
 
 /* modal */
@@ -129,7 +115,6 @@
 .modal-container {
     width: 100%;
     height: 100%;
-    /* border: 1px solid red; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -138,7 +123,6 @@
 .modal-message {
     width: 40%;
     height: 40%;
-    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -151,7 +135,6 @@
     width: 90%;
     height: 50%;
     color: #ffffff;
-    /* border: 1px solid red; */
     font-size: 20px;
     display: flex;
     align-items: center;
@@ -171,7 +154,6 @@
     cursor: pointer;
     background: #1098ad;
     transition: all .25s ease;
-    /* background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82); */
     text-shadow: 3px 3px 10px rgba(0, 0, 0, .45);
 }
 
@@ -206,11 +188,6 @@
         width: 100%;
         height: 50%;
     }
-    /* .random-number {
-        font-size: 20px;
-        width: 40%;
-    } */
- 
     .btn-recording {
         width: 30%;
         height: 70%;
@@ -218,7 +195,6 @@
     .cam-container {
         width: 75%;
         height: 75%;
-        /* border: 1px solid red; */
     }
     .container-2 {
         width: 100%;

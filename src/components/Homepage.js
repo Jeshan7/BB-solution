@@ -22,7 +22,7 @@ function Homepage(props) {
   const [camHeight, setCamHeight] = useState(null);
   const [message, setMessage] = useState(null);
 
-  const webcamRef = useRef(null);  
+  const webcamRef = useRef(null);
 
   useEffect(() => {
     setCamResolution();
@@ -102,10 +102,16 @@ function Homepage(props) {
         <div className="col-md-12 Homepage">
           <div className="header-container">
             <span className="header-name">{localStorage.getItem("name")}</span>
-            <div className="btn-logout" >
-              <img src={logoutIcon} onClick={handleLogout} width="50" height="50" style={{ cursor: "pointer"}}/>
-              </div>
+            <div className="btn-logout">
+              <img
+                src={logoutIcon}
+                onClick={handleLogout}
+                width="50"
+                height="50"
+                style={{ cursor: "pointer" }}
+              />
             </div>
+          </div>
           <div className="main-container">
             <div className="message-box">
               <span>
@@ -124,42 +130,42 @@ function Homepage(props) {
                 handleVerification={handleVerification}
               />
             ) : (
-                <div className="homepage-container">
-                  <div className="camera-container">
-                    <div className="camera">
-                      <Webcam
-                        audio={false}
-                        height={camHeight}
-                        ref={webcamRef}
-                        screenshotFormat="image/jpeg"
-                        width={camWidth}
-                        videoConstraints={videoConstraints}
-                      />
-                    </div>
-
-                    <div className="screenshot-container">
-                      <span>Screenshots</span>
-                      <div className="screenshot">
-                        {imgSrc ? (
-                          <img src={imgSrc} width="200" height="140" />
-                        ) : (
-                          "No Screenshots"
-                        )}
-                      </div>
-                    </div>
+              <div className="homepage-container">
+                <div className="camera-container">
+                  <div className="camera">
+                    <Webcam
+                      audio={false}
+                      height={camHeight}
+                      ref={webcamRef}
+                      screenshotFormat="image/jpeg"
+                      width={camWidth}
+                      videoConstraints={videoConstraints}
+                    />
                   </div>
-                  <div className="session-btn-grp">
-                    {!session ? (
-                      <button className="session-btn" onClick={handleSession}>
-                        Start
-                      </button>
-                    ) : (
-                      <button className="session-btn" onClick={handleSession}>
-                        Stop
-                      </button>
-                    )}
+
+                  <div className="screenshot-container">
+                    <span>Screenshots</span>
+                    <div className="screenshot">
+                      {imgSrc ? (
+                        <img src={imgSrc} width="200" height="140" />
+                      ) : (
+                        "No Screenshots"
+                      )}
+                    </div>
                   </div>
                 </div>
+                <div className="session-btn-grp">
+                  {!session ? (
+                    <button className="session-btn" onClick={handleSession}>
+                      Start
+                    </button>
+                  ) : (
+                    <button className="session-btn" onClick={handleSession}>
+                      Stop
+                    </button>
+                  )}
+                </div>
+              </div>
             )}
           </div>
         </div>

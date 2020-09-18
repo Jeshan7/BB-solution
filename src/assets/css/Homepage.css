@@ -1,5 +1,6 @@
 .Homepage {
-    height: 760px;
+    /* height: 773px; */
+    height: 100vh;
     background-color: #121212;
     margin: auto;
     display: flex;
@@ -45,7 +46,6 @@
     height: 75%;
     background-color: #212121;
     box-shadow: 0 -3px 20px 0 rgba(0, 0, 0, 0.5);
-    /* box-shadow: 0 20px 50px rgb(211, 211, 211); */
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -151,23 +151,19 @@
         width: 90%;
         height: 70%;
     }
-
     .message-box {
         width: 90%;
         height: 10%;
         background-color: #424242;
         box-shadow: 0 -3px 20px 0 rgba(0, 0, 0, 0.5);
     }
-    
     .homepage-container {
         width: 100%;
     }
-
-    .session-btn{
+    .session-btn {
         width: 40%;
         height: 60%;
     }
-
     .session-btn-grp {
         width: 100%;
         height: 15%;
@@ -175,7 +171,6 @@
         justify-content: flex-start;
         align-items: center;
     }
-
     .camera-container {
         width: 90%;
         height: 90%;
@@ -199,12 +194,10 @@
         width: 90%;
         height: 80%;
     }
-
     .header-container {
         width: 80%;
         height: 8%;
     }
-    
     .header-name {
         width: 70%;
         height: 100%;

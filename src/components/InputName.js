@@ -11,17 +11,17 @@ function InputName(props) {
   const [height, setHeight] = useState(null);
   const [isValid, setIsValid] = useState(false);
   const [message, setMessage] = useState("Please provide your signature");
-  
+
   const signRef = useRef(null);
 
   useEffect(() => {
     setPadResolution();
-  }, [])
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name && name !== null) {
-      setIsValid(true)
+      setIsValid(true);
       localStorage.setItem("name", name);
     }
   };
@@ -41,12 +41,12 @@ function InputName(props) {
   };
 
   const handleMessageCss = () => {
-   if(message === "No signature found") {
-     return "message-container danger";
-   } else {
-    return "message-container";
-   }
-  }
+    if (message === "No signature found") {
+      return "message-container danger";
+    } else {
+      return "message-container";
+    }
+  };
 
   const handleSign = () => {
     if (!signRef.current.isEmpty()) {
@@ -54,17 +54,18 @@ function InputName(props) {
         props.history.push("/session");
       }
     } else {
-      setMessage("No signature found")
+      setMessage("No signature found");
     }
   };
 
   return (
     <div className="Input">
-      {isValid ? <div className={handleMessageCss()}>
-        <span>{message}</span>
+      {isValid ? (
+        <div className={handleMessageCss()}>
+          <span>{message}</span>
         </div>
-        : null}
-      {isValid  ? (
+      ) : null}
+      {isValid ? (
         <div className="pad-container">
           <div className="sign-pad">
             <SignatureCanvas
@@ -97,7 +98,11 @@ function InputName(props) {
       ) : (
         <form className="form-container" onSubmit={handleSubmit}>
           <div className="input-box">
-            <input type="text" placeholder="Enter Name" onChange={(e) => setName(e.target.value)} />
+            <input
+              type="text"
+              placeholder="Enter Name"
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
         </form>
       )}

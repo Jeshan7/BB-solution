@@ -121,7 +121,7 @@ function Verification(props) {
               <img src={recorderIcon} />
               You have been idle for 15 seconds
               <br />
-              Please verify 
+              Please verify
             </span>
             <button className="modal-btn" onClick={handleModal}>
               Ok
