@@ -1,17 +1,20 @@
 .Input {
     width: 100%;
     height: 100vh;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     background-color: #121212;
 }
 
+/* forms */
+
 .form-container {
-    width: 90%;
+    width: 80%;
     height: 80%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,28 +23,94 @@
 
 .input-box {
     width: 90%;
-    height: 80%;
-    width: 60%;
-    height: 15%;
-    border-bottom: 3px solid red;
+    height: 20%;
+     border-left: 2px solid red;
+     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 input {
     width: 100%;
-    height: 100%;
+    height: 50%;
     font-size: 50px !important;
+    padding-left: 20px;
     color: #ffffff;
     border: none;
     outline: none;
     background-color: #121212;
-    text-align: center;
-    /* border-bottom: red !important; */
+    opacity: 0.6;
 }
 
-.text-name {
+/* Signature */
+
+.message-container {
+    width: 25%;
+    height: 10%;
+    color: #ffffff;
+    background-color: #424242;
+    box-shadow: 0 -3px 20px 0 rgba(0, 0, 0, 0.5);
+    font-size: 20px;
+    opacity: 0.7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pad-container {
+    width: 80%;
+    height: 80%;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.sigCanvas {
+    background-color: #303030;
+    box-shadow: 0 -3px 20px 0 rgba(0, 0, 0, 0.5);
+    cursor: url('../images/pencil.cur'), auto;
+}
+
+.danger {
+    background-color: #e57373;
+    box-shadow: 0 -3px 20px 0 #e57373;
+    color: #ffffff;
+}
+
+.sign-btn-grp {
+    width: 20%;
+    height: 10%;
+    background-color: #303030;
+    box-shadow: 0 -3px 20px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 10;
+}
+
+@media only screen and (max-width: 600px) {
+.pad-container{
+    width: 80%;
+    height: 70%;
+}
+
+.sigCanvas{
+    width: 100%;
+    height: 100%;
+}
+.sign-btn-grp {
     width: 60%;
     height: 20%;
-    /* border: 1px solid red; */
-    color: #ffffff;
-    font-size: 50px !important;
+}
+
+.message-container {
+    width: 60%;
+    height: 10%;
+    font-size: 15px;
+}
+
 }

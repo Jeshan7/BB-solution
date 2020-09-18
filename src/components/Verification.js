@@ -1,20 +1,20 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import "../assets/css/Verification.css";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import Webcam from "react-webcam";
 import { isMobile } from "react-device-detect";
+import "../assets/css/Verification.css";
 import recorderIcon from "../assets/images/recording.gif";
 import refreshIcon from "../assets/images/refresh.png";
 
 function Verification(props) {
   const webcamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
-  const [capturing, setCapturing] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
-  const [randomNumber, setRandomNumber] = useState(null);
   const [modal, showmodal] = useState(false);
+  const [capturing, setCapturing] = useState(false);
+  const [randomNumber, setRandomNumber] = useState(null);
   const [camWidth, setCamWidth] = useState(null);
   const [camHeight, setCamHeight] = useState(null);
 
@@ -22,7 +22,7 @@ function Verification(props) {
 
   useEffect(() => {
     showmodal(true);
-    setPadResolution();
+    setCamResolution();
     generateNumber();
   }, []);
 
@@ -33,7 +33,7 @@ function Verification(props) {
       resetTranscript();
       console.log("aaaas", transcript);
       if (randomNumber == transcript) {
-        props.abc();
+        props.handleVerification();
       }
     }
   }, [transcript, capturing]);
@@ -42,9 +42,9 @@ function Verification(props) {
     props.handleMessage("Recording Started");
   }
 
-  const setPadResolution = () => {
+  const setCamResolution = () => {
     if (isMobile) {
-      setCamWidth(100);
+      setCamWidth(200);
       setCamHeight(200);
     } else {
       setCamWidth(400);
@@ -89,7 +89,7 @@ function Verification(props) {
 
   const handleModal = () => {
     showmodal(false);
-    props.handleMessage("Please record a video");
+    props.handleMessage("Click to start recording");
   };
 
   // const handleDownload = () => {
@@ -130,23 +130,19 @@ function Verification(props) {
         <>
           <div className="container-1">
             <div className="btn-container">
-              {/* <button className="btn-generate" onClick={generateNumber}>
-                {" "}
-                Generate{" "}
-              </button> */}
               {capturing ? (
                 <button
                   className="btn-recording"
                   onClick={handleStopCaptureClick}
                 >
-                  Stop Recording
+                  Stop
                 </button>
               ) : (
                 <button
                   className="btn-recording"
                   onClick={handleStartCaptureClick}
                 >
-                  Start Recording
+                  Start
                 </button>
               )}
             </div>

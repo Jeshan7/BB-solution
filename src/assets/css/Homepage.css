@@ -14,10 +14,39 @@
     flex-direction: column;
 }
 
-.a {
-    width: 100%;
+/* Header */
+
+.header-container {
+    width: 60%;
     height: 10%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    color: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.header-name {
+    width: 40%;
+    height: 100%;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    text-transform: capitalize;
+    background-color: #212121;
+    box-shadow: 0 -3px 20px 0 rgba(0, 0, 0, 0.5);
+    opacity: 0.8;
+}
+
+.btn-logout {
+    width: 30%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid red; */
 }
 
 .main-container {
@@ -33,40 +62,7 @@
     align-items: center;
 }
 
-.pad-container {
-    width: 80%;
-    height: 80%;
-    /* border: 1px solid red; */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.sigCanvas {
-    /* width: 80%;
-    height: 80%; */
-    /* border: 1px solid red; */
-    background-color: #303030;
-    box-shadow: 0 -3px 20px 0 rgba(0, 0, 0, 0.5);
-    cursor: url('../images/pencil.cur'), auto;
-    /* box-shadow: 0 5px 50px rgb(211, 211, 211); */
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-}
-
-.sign-btn-grp {
-    width: 40%;
-    height: 10%;
-    /* border: 1px solid red; */
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 10;
-}
-
-.webcamera-container {
+.homepage-container {
     width: 80%;
     height: 80%;
     /* border: 1px solid red; */
@@ -79,7 +75,7 @@
 .message-box {
     width: 40%;
     height: 15%;
-    /* border: 1px solid black; */
+    /* border: 1px solid red; */
     /* box-shadow: 0 5px 50px rgb(211, 211, 211); */
     background-color: #424242;
     box-shadow: 0 -3px 20px 0 rgba(0, 0, 0, 0.5);
@@ -91,7 +87,7 @@
     font-size: 20px;
 }
 
-.cam {
+.camera-container {
     width: 100%;
     height: 60%;
     /* border: 1px solid green; */
@@ -126,7 +122,7 @@
     width: 50%;
     height: 90%;
     /* border: 1px solid green; */
-    color: #03dac6;
+    color: #64b5f6;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -145,46 +141,70 @@
 }
 
 .session-btn {
+    width: 10%;
+    height: 30%;
     border: none;
-    padding: 1em;
     outline: none !important;
     color: #ffffff;
     font-weight: 900;
-    font-style: 1.2em;
-    letter-spacing: 0.2em;
+    font-style: 25px;
     position: relative;
     z-index: 1;
     cursor: pointer;
-    background: #a166ab;
+    background: #1098ad;
     transition: all .25s ease;
     /* background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82); */
     text-shadow: 3px 3px 10px rgba(0, 0, 0, .45);
 }
 
 .session-btn:hover {
-    box-shadow: 0 -3px 20px 0 #a166ab;
+    box-shadow: 0 -3px 20px 0 #1098ad;
     outline: none !important;
 }
 
 @media only screen and (max-width: 600px) {
+    .Homepage {
+        justify-content: space-evenly;
+        height: 735px;
+    }
+    .main-container {
+        width: 90%;
+        height: 70%;
+    }
+
     .message-box {
-        width: 70%;
-        height: 15%;
+        width: 90%;
+        height: 10%;
         background-color: #424242;
         box-shadow: 0 -3px 20px 0 rgba(0, 0, 0, 0.5);
     }
-    .webcamera-container {
-        /* width: 100%;
-        height: 100%;
-        border: 1px solid red; */
-    }
-    .cam {
+    
+    .homepage-container {
         width: 100%;
+    }
+
+    .session-btn{
+        width: 40%;
         height: 60%;
+    }
+
+    .session-btn-grp {
+        width: 100%;
+        height: 15%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        /* border: 1px solid red; */
+    }
+
+    .camera-container {
+        width: 90%;
+        height: 90%;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
         flex-direction: column;
+         /* border: 1px solid red; */
     }
     .camera {
         width: 50%;
@@ -200,5 +220,18 @@
     }
     .screenshot {
         width: 90%;
+        height: 80%;
+    }
+
+    .header-container {
+        width: 80%;
+        height: 8%;
+        /* border: 1px solid red; */
+    }
+    
+    .header-name {
+        width: 70%;
+        height: 100%;
+        font-size: 15px;
     }
 }

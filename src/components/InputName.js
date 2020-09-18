@@ -1,42 +1,37 @@
-import React, { useState, useRef } from "react";
-import "../assets/css/Inputname.css";
-import "../assets/css/Homepage.css";
-import { Redirect } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
 import SignatureCanvas from "react-signature-canvas";
 import { isMobile } from "react-device-detect";
+import "../assets/css/Inputname.css";
 import clearIcon from "../assets/images/close.png";
 import nextIcon from "../assets/images/next.png";
 
-import Homepage from "./Homepage";
-
 function InputName(props) {
   const [name, setName] = useState(null);
-  const signRef = useRef(null);
   const [width, setWidth] = useState(null);
   const [height, setHeight] = useState(null);
-  const [camWidth, setCamWidth] = useState(null);
-  const [camHeight, setCamHeight] = useState(null);
-  const [b, setb] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+  const [message, setMessage] = useState("Please provide your signature");
+  const signRef = useRef(null);
 
-  const nam = (e) => {
+  useEffect(() => {
+    setPadResolution();
+  }, [])
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (name && name !== null) {
+      setIsValid(true)
       localStorage.setItem("name", name);
     }
   };
 
   const setPadResolution = () => {
-    // setMessage("Please provide your signature to proceed");
     if (isMobile) {
-      setWidth(250);
-      setHeight(400);
-      setCamWidth(250);
-      setCamHeight(120);
+      setWidth(300);
+      setHeight(300);
     } else {
       setWidth(700);
       setHeight(360);
-      setCamWidth(350);
-      setCamHeight(350);
     }
   };
 
@@ -44,22 +39,31 @@ function InputName(props) {
     signRef.current.clear();
   };
 
-  const next = () => {
+  const handleMessageCss = () => {
+   if(message === "No signature found") {
+     return "message-container danger";
+   } else {
+    return "message-container";
+   }
+  }
+
+  const handleSign = () => {
     if (!signRef.current.isEmpty()) {
       if (localStorage.getItem("name")) {
         props.history.push("/session");
       }
-      //   setb(true);
-      //   setMessage("Click to start the session ");
     } else {
-      //   setMessage("No signature found");
+      setMessage("No signature found")
     }
   };
 
   return (
     <div className="Input">
-      {/* <div className="input-container"> */}
-      {name !== null && localStorage.getItem("name") ? (
+      {isValid ? <div className={handleMessageCss()}>
+        <span>{message}</span>
+        </div>
+        : null}
+      {isValid  ? (
         <div className="pad-container">
           <div className="sign-pad">
             <SignatureCanvas
@@ -84,21 +88,18 @@ function InputName(props) {
               src={nextIcon}
               width="40"
               height="40"
-              onClick={next}
+              onClick={handleSign}
               style={{ cursor: "pointer" }}
             />
           </div>
         </div>
       ) : (
-        <form className="form-container" onSubmit={nam}>
-          <span className="text-name">Enter your Name</span>
+        <form className="form-container" onSubmit={handleSubmit}>
           <div className="input-box">
-            <input type="text" onChange={(e) => setName(e.target.value)} />
+            <input type="text" placeholder="Enter Name" onChange={(e) => setName(e.target.value)} />
           </div>
         </form>
       )}
-
-      {/* </div> */}
     </div>
   );
 }

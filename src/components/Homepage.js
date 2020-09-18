@@ -1,13 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import "../assets/css/Homepage.css";
+import { isMobile } from "react-device-detect";
 import { useIdleTimer } from "react-idle-timer";
 import Webcam from "react-webcam";
+import "../assets/css/Homepage.css";
 import Verification from "./Verification";
-import SignatureCanvas from "react-signature-canvas";
-import { isMobile } from "react-device-detect";
-import clearIcon from "../assets/images/close.png";
-import nextIcon from "../assets/images/next.png";
-import rn from "../assets/images/check.gif";
+import checkIcon from "../assets/images/check.gif";
+import logoutIcon from "../assets/images/exit.png";
 
 const videoConstraints = {
   width: 1280,
@@ -16,23 +14,19 @@ const videoConstraints = {
 };
 
 function Homepage(props) {
-  const [imgSrc, setImgSrc] = useState(null);
+  const webcamRef = useRef(null);
+
   const [session, setSession] = useState(false);
   const [isIdle, setIsIdle] = useState(false);
   const [verify, setVerify] = useState(false);
-  const [aa, setaa] = useState(true);
-  const [b, setb] = useState(false);
-  const [width, setWidth] = useState(null);
-  const [height, setHeight] = useState(null);
+  const [imgSrc, setImgSrc] = useState(null);
   const [camWidth, setCamWidth] = useState(null);
   const [camHeight, setCamHeight] = useState(null);
   const [message, setMessage] = useState(null);
-
-  const webcamRef = useRef(null);
-  const signRef = useRef(null);
+  
 
   useEffect(() => {
-    setPadResolution();
+    setCamResolution();
   }, []);
 
   useEffect(() => {
@@ -48,16 +42,12 @@ function Homepage(props) {
     return () => clearInterval(interval);
   }, [session]);
 
-  const setPadResolution = () => {
-    setMessage("Please provide your signature to proceed");
+  const setCamResolution = () => {
+    setMessage("Click to start the session");
     if (isMobile) {
-      setWidth(250);
-      setHeight(400);
       setCamWidth(250);
       setCamHeight(120);
     } else {
-      setWidth(700);
-      setHeight(360);
       setCamWidth(350);
       setCamHeight(350);
     }
@@ -66,11 +56,6 @@ function Homepage(props) {
   const capture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImgSrc(imageSrc);
-    // let x = b64toBlob(imageSrc);
-    // var file = new File([x], "name");
-    // console.log("hello", x);
-
-    // console.log("hello", file);
   };
 
   const handleSession = () => {
@@ -91,10 +76,9 @@ function Homepage(props) {
     }
   };
 
-  const abc = () => {
+  const handleVerification = () => {
     setIsIdle(false);
     setVerify(false);
-    setb(true);
     handleMessage("Verified");
   };
 
@@ -104,24 +88,11 @@ function Homepage(props) {
     debounce: 500,
   });
 
-  const handleClear = () => {
-    signRef.current.clear();
-  };
-
-  const next = () => {
-    if (!signRef.current.isEmpty()) {
-      setb(true);
-      setMessage("Click to start the session ");
-    } else {
-      setMessage("No signature found");
-    }
-  };
-
   const handleMessage = (msg) => {
     setMessage(msg);
   };
 
-  const logout = () => {
+  const handleLogout = () => {
     localStorage.removeItem("name");
     props.history.push("/");
   };
@@ -130,13 +101,18 @@ function Homepage(props) {
     <>
       <div className="row">
         <div className="col-md-12 Homepage">
-          <div className="a">{localStorage.getItem("name")}</div>
+          <div className="header-container">
+            <span className="header-name">{localStorage.getItem("name")}</span>
+            <div className="btn-logout" >
+              <img src={logoutIcon} onClick={handleLogout} width="50" height="50" style={{ cursor: "pointer"}}/>
+              </div>
+            </div>
           <div className="main-container">
             <div className="message-box">
               <span>
                 {message ? (
                   message === "Verified" ? (
-                    <img src={rn} width="50" height="50" />
+                    <img src={checkIcon} width="50" height="50" />
                   ) : (
                     message
                   )
@@ -146,46 +122,11 @@ function Homepage(props) {
             {isIdle && verify ? (
               <Verification
                 handleMessage={handleMessage}
-                abc={abc}
-                isIdle={isIdle}
-                verify={verify}
+                handleVerification={handleVerification}
               />
             ) : (
-              <>
-                {" "}
-                {/* {!b ? (
-                  <div className="pad-container">
-                    <div className="sign-pad">
-                      <SignatureCanvas
-                        penColor="#acdbdf"
-                        ref={signRef}
-                        canvasProps={{
-                          width: width,
-                          height: height,
-                          className: "sigCanvas",
-                        }}
-                      />
-                    </div>
-                    <div className="sign-btn-grp">
-                      <img
-                        src={clearIcon}
-                        width="40"
-                        height="40"
-                        onClick={handleClear}
-                        style={{ cursor: "pointer" }}
-                      />
-                      <img
-                        src={nextIcon}
-                        width="40"
-                        height="40"
-                        onClick={next}
-                        style={{ cursor: "pointer" }}
-                      />
-                    </div>
-                  </div>
-                ) : ( */}
-                <div className="webcamera-container">
-                  <div className="cam">
+                <div className="homepage-container">
+                  <div className="camera-container">
                     <div className="camera">
                       <Webcam
                         audio={false}
@@ -203,7 +144,7 @@ function Homepage(props) {
                         {imgSrc ? (
                           <img src={imgSrc} width="200" height="140" />
                         ) : (
-                          "No Screenshots to show"
+                          "No Screenshots"
                         )}
                       </div>
                     </div>
@@ -211,18 +152,15 @@ function Homepage(props) {
                   <div className="session-btn-grp">
                     {!session ? (
                       <button className="session-btn" onClick={handleSession}>
-                        Start Session
+                        Start
                       </button>
                     ) : (
                       <button className="session-btn" onClick={handleSession}>
-                        Stop Session
+                        Stop
                       </button>
                     )}
-                    <button onClick={logout}>logout</button>
                   </div>
                 </div>
-                {/* )} */}
-              </>
             )}
           </div>
         </div>
