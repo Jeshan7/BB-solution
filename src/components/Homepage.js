@@ -14,8 +14,6 @@ const videoConstraints = {
 };
 
 function Homepage(props) {
-  const webcamRef = useRef(null);
-
   const [session, setSession] = useState(false);
   const [isIdle, setIsIdle] = useState(false);
   const [verify, setVerify] = useState(false);
@@ -23,7 +21,8 @@ function Homepage(props) {
   const [camWidth, setCamWidth] = useState(null);
   const [camHeight, setCamHeight] = useState(null);
   const [message, setMessage] = useState(null);
-  
+
+  const webcamRef = useRef(null);  
 
   useEffect(() => {
     setCamResolution();

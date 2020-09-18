@@ -11,6 +11,7 @@ function InputName(props) {
   const [height, setHeight] = useState(null);
   const [isValid, setIsValid] = useState(false);
   const [message, setMessage] = useState("Please provide your signature");
+  
   const signRef = useRef(null);
 
   useEffect(() => {

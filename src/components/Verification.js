@@ -9,14 +9,15 @@ import recorderIcon from "../assets/images/recording.gif";
 import refreshIcon from "../assets/images/refresh.png";
 
 function Verification(props) {
-  const webcamRef = useRef(null);
-  const mediaRecorderRef = useRef(null);
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [modal, showmodal] = useState(false);
   const [capturing, setCapturing] = useState(false);
   const [randomNumber, setRandomNumber] = useState(null);
   const [camWidth, setCamWidth] = useState(null);
   const [camHeight, setCamHeight] = useState(null);
+
+  const webcamRef = useRef(null);
+  const mediaRecorderRef = useRef(null);
 
   const { transcript, resetTranscript } = useSpeechRecognition();
 
@@ -55,6 +56,7 @@ function Verification(props) {
   const generateNumber = () => {
     let random_number = Math.floor(Math.random() * 9000) + 1000;
     setRandomNumber(random_number);
+    resetTranscript();
   };
 
   const handleStartCaptureClick = () => {
