@@ -29,10 +29,8 @@ function Verification(props) {
 
   useEffect(() => {
     if (transcript && capturing) {
-      console.log("as", transcript);
     } else {
       resetTranscript();
-      console.log("aaaas", transcript);
       if (randomNumber == transcript) {
         props.handleVerification();
       }
@@ -119,7 +117,7 @@ function Verification(props) {
           <div className="modal-message">
             <span className="modal-text">
               <img src={recorderIcon} />
-              You have been idle for 15 seconds
+              You have been idle for 5 minutes
               <br />
               Please verify
             </span>

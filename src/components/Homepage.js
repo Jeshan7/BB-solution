@@ -33,8 +33,7 @@ function Homepage(props) {
     if (session) {
       interval = setInterval(() => {
         capture();
-        console.log("heeeee");
-      }, 120000000);
+      }, 120000);
     } else {
       clearInterval(interval);
     }
@@ -82,7 +81,7 @@ function Homepage(props) {
   };
 
   const { getRemainingTime, getLastActiveTime } = useIdleTimer({
-    timeout: 300000000,
+    timeout: 300000,
     onIdle: handleOnIdle,
     debounce: 500,
   });
