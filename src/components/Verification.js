@@ -45,7 +45,7 @@ function Verification(props) {
   const setCamResolution = () => {
     if (isMobile) {
       setCamWidth(200);
-      setCamHeight(200);
+      setCamHeight(150);
     } else {
       setCamWidth(400);
       setCamHeight(400);
