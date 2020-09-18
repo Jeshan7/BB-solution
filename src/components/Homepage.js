@@ -77,14 +77,13 @@ function Homepage(props) {
     setSession(!session);
     if (session) {
       setMessage("Session stopped");
-      localStorage.removeItem("name");
     } else {
       setMessage("Session started");
     }
   };
 
   const handleOnIdle = (event) => {
-    if (b && session) {
+    if (session) {
       setIsIdle(true);
       setVerify(true);
       setSession(false);
@@ -122,6 +121,11 @@ function Homepage(props) {
     setMessage(msg);
   };
 
+  const logout = () => {
+    localStorage.removeItem("name");
+    props.history.push("/");
+  };
+
   return (
     <>
       <div className="row">
@@ -149,7 +153,7 @@ function Homepage(props) {
             ) : (
               <>
                 {" "}
-                {!b ? (
+                {/* {!b ? (
                   <div className="pad-container">
                     <div className="sign-pad">
                       <SignatureCanvas
@@ -179,44 +183,45 @@ function Homepage(props) {
                       />
                     </div>
                   </div>
-                ) : (
-                  <div className="webcamera-container">
-                    <div className="cam">
-                      <div className="camera">
-                        <Webcam
-                          audio={false}
-                          height={camHeight}
-                          ref={webcamRef}
-                          screenshotFormat="image/jpeg"
-                          width={camWidth}
-                          videoConstraints={videoConstraints}
-                        />
-                      </div>
-
-                      <div className="screenshot-container">
-                        <span>Screenshots</span>
-                        <div className="screenshot">
-                          {imgSrc ? (
-                            <img src={imgSrc} width="200" height="140" />
-                          ) : (
-                            "No Screenshots to show"
-                          )}
-                        </div>
-                      </div>
+                ) : ( */}
+                <div className="webcamera-container">
+                  <div className="cam">
+                    <div className="camera">
+                      <Webcam
+                        audio={false}
+                        height={camHeight}
+                        ref={webcamRef}
+                        screenshotFormat="image/jpeg"
+                        width={camWidth}
+                        videoConstraints={videoConstraints}
+                      />
                     </div>
-                    <div className="session-btn-grp">
-                      {!session ? (
-                        <button className="session-btn" onClick={handleSession}>
-                          Start Session
-                        </button>
-                      ) : (
-                        <button className="session-btn" onClick={handleSession}>
-                          Stop Session
-                        </button>
-                      )}
+
+                    <div className="screenshot-container">
+                      <span>Screenshots</span>
+                      <div className="screenshot">
+                        {imgSrc ? (
+                          <img src={imgSrc} width="200" height="140" />
+                        ) : (
+                          "No Screenshots to show"
+                        )}
+                      </div>
                     </div>
                   </div>
-                )}
+                  <div className="session-btn-grp">
+                    {!session ? (
+                      <button className="session-btn" onClick={handleSession}>
+                        Start Session
+                      </button>
+                    ) : (
+                      <button className="session-btn" onClick={handleSession}>
+                        Stop Session
+                      </button>
+                    )}
+                    <button onClick={logout}>logout</button>
+                  </div>
+                </div>
+                {/* )} */}
               </>
             )}
           </div>

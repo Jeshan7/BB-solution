@@ -1,9 +1,5 @@
 .App {
   text-align: center;
-  /* font-family: 'Bungee Inline', cursive; */
-  font-family: 'Titillium Web', sans-serif;
-  /* font-family: 'Cairo', sans-serif; */
-  /* font-family: 'Montserrat', sans-serif; */
 }
 
 .row {
@@ -14,9 +10,4 @@
 .col-md-10, .col-md-12 {
   padding: 0 !important;
   margin: 0 !important;
-}
-
-.ap {
-  height: 100vh;
-  border: 1px solid green;
 }
