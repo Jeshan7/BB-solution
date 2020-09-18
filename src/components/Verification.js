@@ -119,9 +119,9 @@ function Verification(props) {
           <div className="modal-message">
             <span className="modal-text">
               <img src={recorderIcon} />
-              You have been idle for 5 minutes
+              You have been idle for 15 seconds
               <br />
-              Please record a video to continue
+              Please verify 
             </span>
             <button className="modal-btn" onClick={handleModal}>
               Ok
