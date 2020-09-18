@@ -49,6 +49,7 @@
     /* border: 1px solid red; */
     background-color: #303030;
     box-shadow: 0 -3px 20px 0 rgba(0, 0, 0, 0.5);
+    cursor: url('../images/pencil.cur'), auto;
     /* box-shadow: 0 5px 50px rgb(211, 211, 211); */
     /* display: flex;
     justify-content: center;

@@ -1,22 +1,18 @@
 import React, { useState } from "react";
 import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Homepage from "./components/Homepage";
+import InputName from "./components/InputName";
 
 function App() {
-  const [name, setName] = useState(null);
-  const nam = (e) => {
-    localStorage.setItem("name", name);
-  };
   return (
     <div className="App">
-      {" "}
-      {name ? (
-        <form onSubmit={nam}>
-          <input type="text" onChange={(e) => setName(e.target.value)} />
-        </form>
-      ) : (
-        <Homepage />
-      )}
+      <Router>
+        <Switch>
+          <Route path="/" exact component={InputName} />
+          <Route path="/session" component={Homepage} />
+        </Switch>
+      </Router>
     </div>
   );
 }

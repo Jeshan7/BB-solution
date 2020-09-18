@@ -77,6 +77,7 @@ function Homepage(props) {
     setSession(!session);
     if (session) {
       setMessage("Session stopped");
+      localStorage.removeItem("name");
     } else {
       setMessage("Session started");
     }
